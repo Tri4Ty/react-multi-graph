@@ -9,11 +9,11 @@ module.exports = merge(core, {
   mode: "production",
   devtool: "source-map",
   entry: {
-    "react-multi-graph": [path.join(__dirname, "/index.js")]
+    "react-multi-graph": "./index.js"
   },
   output: {
     filename: "[name].bundle.js",
-    path: path.join(__dirname, "dist"),
+    path: path.resolve(__dirname, "dist"),
     publicPath: "/",
     library: "reactMultiGraph",
     libraryTarget: "umd"
@@ -33,6 +33,9 @@ module.exports = merge(core, {
   },
   plugins: [new CleanWebpackPlugin()],
   optimization: {
-    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
+    minimizer: [
+      new TerserJSPlugin({ sourceMap: true }),
+      new OptimizeCSSAssetsPlugin({})
+    ]
   }
 });

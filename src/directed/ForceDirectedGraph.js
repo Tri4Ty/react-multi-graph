@@ -6,7 +6,11 @@ class ForceDirectedGraph extends Component {
   render() {
     let { id, data, config } = this.props;
 
-    return <Graph id={id} data={data} config={config} />;
+    if (data.nodes && data.nodes.length > 0) {
+      return <Graph id={id} data={data} config={config} />;
+    } else {
+      return <p>Empty Graph</p>;
+    }
   }
 }
 export default ForceDirectedGraph;
@@ -18,7 +22,7 @@ ForceDirectedGraph.propTypes = {
       PropTypes.shape({
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
       })
-    ).isRequired,
+    ),
     links: PropTypes.arrayOf(
       PropTypes.shape({
         source: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
